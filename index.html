@@ -3,6 +3,12 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b1020">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 <title>Control Centre — Personal Productivity</title>
 <style>
 :root{--bg:#0b1020;--panel:#121a2d;--panel2:#172238;--line:#263550;--text:#edf2ff;--muted:#91a0ba;--accent:#8b9cff;--mint:#6ee7c0;--yellow:#f6c96b;--red:#ff8585;--radius:18px}
@@ -164,6 +170,14 @@ function downloadBlob(blob,name){let a=document.createElement('a');a.href=URL.cr
 function downloadICS(){let events=state.schedule.map(s=>{let [hh,mm]=s.time.split(':').map(Number),d=today().replaceAll('-','');let start=new Date();start.setHours(hh,mm,0,0);let end=new Date(start.getTime()+30*60000);let fmtD=x=>x.getFullYear()+String(x.getMonth()+1).padStart(2,'0')+String(x.getDate()).padStart(2,'0')+'T'+String(x.getHours()).padStart(2,'0')+String(x.getMinutes()).padStart(2,'0')+'00';return `BEGIN:VEVENT\nUID:${crypto.randomUUID()}@controlcentre\nDTSTAMP:${fmtD(new Date())}\nDTSTART:${fmtD(start)}\nDTEND:${fmtD(end)}\nSUMMARY:${s.title.replace(/[,;\\]/g,' ')}\nEND:VEVENT`}).join('\n');let ics=`BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Control Centre//EN\nCALSCALE:GREGORIAN\n${events}\nEND:VCALENDAR`;downloadBlob(new Blob([ics],{type:'text/calendar'}),`control-centre-${today()}.ics`)}
 function render(){nav();document.getElementById('todayLabel').textContent=dateLabel();({overview,targets,tasks,subjects,schedule,habits,analytics,focus,settings}[page]||overview)();bind();save()}
 render();
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(err => console.error('Service worker registration failed:', err));
+  });
+}
 </script>
 </body>
 </html>
