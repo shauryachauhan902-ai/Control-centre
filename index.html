@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<title>Control Centre — Personal Productivity</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a2d;--panel2:#172238;--line:#263550;--text:#edf2ff;--muted:#91a0ba;--accent:#8b9cff;--mint:#6ee7c0;--yellow:#f6c96b;--red:#ff8585;--radius:18px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% 0%,#172447 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer;color:inherit}.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh;max-width:1600px;margin:auto}.sidebar{padding:26px 16px;border-right:1px solid var(--line);background:#0b1222cc;position:sticky;top:0;height:100vh}.brand{font-size:19px;font-weight:800;letter-spacing:.3px;padding:0 12px 24px}.brand span{color:var(--accent)}.nav{display:grid;gap:7px}.nav button{border:0;background:transparent;text-align:left;padding:12px;border-radius:12px;color:var(--muted)}.nav button.active,.nav button:hover{background:var(--panel2);color:var(--text)}.sidefoot{position:absolute;bottom:22px;left:22px;right:22px;color:var(--muted);font-size:12px}.main{padding:30px clamp(16px,3vw,42px) 60px;min-width:0}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:24px}.eyebrow{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1.4px}.title{font-size:clamp(25px,3vw,34px);font-weight:800;margin:4px 0}.sub{color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel2);padding:9px 13px;border-radius:11px}.btn.primary{background:var(--accent);border-color:var(--accent);color:#10172a;font-weight:700}.btn.ghost{background:transparent}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:15px}.card{background:linear-gradient(145deg,#151f34,#111a2c);border:1px solid var(--line);border-radius:var(--radius);padding:18px;min-width:0}.span-3{grid-column:span 3}.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-6{grid-column:span 6}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.span-12{grid-column:span 12}.metric{font-size:29px;font-weight:800;margin:8px 0 0}.muted{color:var(--muted)}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.sectionhead h2{font-size:17px;margin:0}.pill{display:inline-flex;align-items:center;padding:4px 9px;border-radius:99px;background:#202d47;color:#b9c7e4;font-size:12px}.bar{height:8px;background:#26334d;border-radius:20px;overflow:hidden;margin-top:10px}.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--mint));border-radius:20px}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.list{display:grid;gap:10px}.item{padding:11px 0;border-bottom:1px solid #25324a}.item:last-child{border:0}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.field{display:grid;gap:5px}.field label{font-size:12px;color:var(--muted)}input,select,textarea{width:100%;background:#0d1628;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px;outline:none}textarea{min-height:76px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:var(--accent)}.field.full{grid-column:1/-1}.task{display:flex;align-items:flex-start;gap:10px}.task input{width:auto;margin-top:5px;accent-color:var(--mint)}.task.done .tasktext{text-decoration:line-through;color:var(--muted)}.tiny{font-size:12px}.empty{color:var(--muted);padding:18px 0;text-align:center}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:17px}.tabs button{border:1px solid var(--line);background:transparent;padding:8px 12px;border-radius:10px;color:var(--muted)}.tabs button.active{background:var(--panel2);color:var(--text);border-color:#53658a}.hidden{display:none!important}.timer{font-size:54px;font-weight:800;letter-spacing:2px;text-align:center;padding:20px 0}.timercontrols{display:flex;justify-content:center;gap:8px}.scheduleline{display:grid;grid-template-columns:110px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.dot{width:8px;height:8px;border-radius:50%;background:var(--mint);display:inline-block;margin-right:8px}.danger{color:var(--red)}.success{color:var(--mint)}.notice{border:1px solid #66552c;background:#332a18;color:#f6d99b;border-radius:12px;padding:12px;font-size:13px}.footer{color:var(--muted);font-size:12px;margin-top:20px}.mobilebar{display:none}
+@media(max-width:950px){.app{grid-template-columns:1fr}.sidebar{display:none}.mobilebar{display:flex;position:sticky;bottom:0;z-index:10;background:#0d1628f2;border-top:1px solid var(--line);justify-content:space-around;padding:8px;overflow:auto}.mobilebar button{background:transparent;border:0;color:var(--muted);font-size:11px;min-width:58px}.mobilebar button.active{color:var(--mint)}.main{padding:20px 14px 90px}.span-3,.span-4,.span-5,.span-6,.span-7,.span-8{grid-column:span 12}.top{align-items:flex-start;flex-direction:column}.scheduleline{grid-template-columns:85px 1fr auto}}
+@media(min-width:951px){.mobilebar{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">◈ <span>CONTROL</span> CENTRE</div>
+  <div class="nav" id="nav"></div>
+  <div class="sidefoot">Personal workspace · Local-first<br><span id="saveState">Changes save on this device</span></div>
+</aside>
+<main class="main">
+  <header class="top">
+    <div><div class="eyebrow" id="todayLabel"></div><div class="title" id="pageTitle">Overview</div><div class="sub" id="pageSub">A clear view of what matters today.</div></div>
+    <div class="actions"><button class="btn" id="exportBtn">Export backup</button><button class="btn" id="importBtn">Import</button><button class="btn primary" id="quickAdd">＋ Add task</button><input type="file" id="importFile" accept="application/json" class="hidden"></div>
+  </header>
+  <section id="content"></section>
+</main>
+</div>
+<nav class="mobilebar" id="mobileNav"></nav>
+<script>
+const KEY='control-centre-v1';
+const defaults={
+ subjects:[
+  {id:'ger',name:'German',exam:'2026-11-18',target:1.5,topics:'Netzwerk neu A1: Ch 1–6'},
+  {id:'py',name:'Python',exam:'2026-11-20',target:.5,topics:'Practice and debugging'},
+  {id:'iks',name:'IKS',exam:'2026-11-21',target:.67,topics:'Daily revision'},
+  {id:'la',name:'Linear Algebra',exam:'2026-11-23',target:1.75,topics:'Topics after Vector Spaces'},
+  {id:'iks2',name:'IKS (second paper)',exam:'2026-11-25',target:0,topics:'Confirm syllabus'},
+  {id:'calc',name:'Calculus',exam:'2026-11-27',target:1.25,topics:'Single + multivariable calculus'},
+  {id:'ed',name:'Engineering Drawing',exam:'2026-11-30',target:1,topics:'Development, isometric, sections'},
+  {id:'evs',name:'EVS',exam:'',target:.5,topics:'MCQ preparation'}
+ ],
+ tasks:[],logs:{},goals:[],habits:['Focused study','IKS 40 min','Walk / movement','Evening revision','Plan tomorrow'],habitLogs:{},
+ schedule:[
+  {time:'07:00',title:'Wake up + morning routine',type:'Personal'},
+  {time:'08:00',title:'Priority study block',type:'Study'},
+  {time:'09:30',title:'Break',type:'Break'},
+  {time:'10:00',title:'Linear Algebra',type:'Study'},
+  {time:'11:45',title:'Lunch / reset',type:'Personal'},
+  {time:'12:30',title:'Calculus',type:'Study'},
+  {time:'14:00',title:'Rest / personal time',type:'Personal'},
+  {time:'15:00',title:'Engineering Drawing',type:'Study'},
+  {time:'16:00',title:'Snack / walk',type:'Personal'},
+  {time:'16:30',title:'Python + EVS',type:'Study'},
+  {time:'17:30',title:'IKS',type:'Study'},
+  {time:'18:10',title:'Dinner / free time',type:'Personal'},
+  {time:'20:00',title:'Revision / pending work',type:'Study'},
+  {time:'21:00',title:'Wind down + plan tomorrow',type:'Personal'}
+ ],
+ settings:{dailyTarget:8,weeklyTarget:40,monthlyTarget:160,wake:'07:00',sleep:'22:30'},
+ reflections:{}
+};
+let state=load(),page='overview',timer=null,timerSeconds=25*60,timerRunning=false;
+function load(){try{return {...structuredClone(defaults),...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch{return structuredClone(defaults)}}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));const el=document.getElementById('saveState');if(el)el.textContent='✓ Saved on this device'}
+function today(){return new Date().toISOString().slice(0,10)}
+function dateLabel(d=today()){return new Date(d+'T12:00:00').toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function hoursFor(date=today()){return Object.values(state.logs[date]||{}).reduce((a,x)=>a+Number(x.hours||0),0)}
+function logFor(date=today(),id){return (state.logs[date]||{})[id]||{hours:0,topic:''}}
+function setLog(date,id,field,val){state.logs[date]??={};state.logs[date][id]??={hours:0,topic:''};state.logs[date][id][field]=val;save()}
+function weekDates(){let d=new Date();let day=(d.getDay()+6)%7;d.setDate(d.getDate()-day);return Array.from({length:7},(_,i)=>{let x=new Date(d);x.setDate(d.getDate()+i);return x.toISOString().slice(0,10)})}
+function monthDates(){let y=new Date().getFullYear(),m=new Date().getMonth();return Array.from({length:new Date(y,m+1,0).getDate()},(_,i)=>`${y}-${String(m+1).padStart(2,'0')}-${String(i+1).padStart(2,'0')}`)}
+function sumDates(ds){return ds.reduce((a,d)=>a+hoursFor(d),0)}
+const pages=[['overview','◫','Overview'],['targets','◎','Targets'],['tasks','☷','Tasks'],['subjects','▤','Subjects'],['schedule','▦','Schedule'],['habits','✳','Habits'],['analytics','⌁','Analytics'],['focus','◷','Focus timer'],['settings','⚙','Settings']];
+function nav(){let html=pages.map(([id,ic,n])=>`<button class="${page===id?'active':''}" data-page="${id}">${ic}　${n}</button>`).join('');document.getElementById('nav').innerHTML=html;document.getElementById('mobileNav').innerHTML=pages.map(([id,ic,n])=>`<button class="${page===id?'active':''}" data-page="${id}">${ic}<br>${n}</button>`).join('');document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{page=b.dataset.page;render()})}
+function shell(title,sub,body){document.getElementById('pageTitle').textContent=title;document.getElementById('pageSub').textContent=sub;document.getElementById('content').innerHTML=body}
+function card(title,body,cls='span-4'){return `<div class="card ${cls}"><div class="sectionhead"><h2>${title}</h2></div>${body}</div>`}
+function progress(v,max){let p=max?Math.min(100,Math.round(v/max*100)):0;return `<div class="bar"><i style="width:${p}%"></i></div>`}
+function overview(){let h=hoursFor(),tasks=state.tasks.filter(t=>t.date===today()),done=tasks.filter(t=>t.done).length,up=state.subjects.filter(s=>s.exam&&s.exam>=today()).sort((a,b)=>a.exam.localeCompare(b.exam));let upcoming=up.map(s=>{let n=Math.ceil((new Date(s.exam+'T00:00:00')-new Date(today()+'T00:00:00'))/86400000);return `<div class="item row"><div><b>${esc(s.name)}</b><div class="tiny muted">${dateLabel(s.exam)}</div></div><span class="pill">${n===0?'Today':n+' days'}</span></div>`}).join('')||'<div class="empty">No upcoming exams added.</div>';
+let subjectRows=state.subjects.map(s=>{let l=logFor(today(),s.id);return `<div class="item"><div class="row"><b>${esc(s.name)}</b><span class="tiny muted">${Number(l.hours||0).toFixed(1)} / ${s.target}h</span></div>${progress(Number(l.hours||0),s.target)}</div>`}).join('');
+shell('Overview','Your daily command centre.',`<div class="grid">
+${card('Today’s focused study',`<div class="metric">${h.toFixed(1)} <span class="muted" style="font-size:15px">/ ${state.settings.dailyTarget} hrs</span></div>${progress(h,state.settings.dailyTarget)}<div class="tiny muted" style="margin-top:8px">${Math.max(0,state.settings.dailyTarget-h).toFixed(1)} hours remaining to target</div>`,'span-3')}
+${card('Tasks completed',`<div class="metric">${done}/${tasks.length}</div><div class="tiny muted">Today's task list</div>${progress(done,tasks.length||1)}`,'span-3')}
+${card('Weekly study time',`<div class="metric">${sumDates(weekDates()).toFixed(1)}h</div><div class="tiny muted">Target: ${state.settings.weeklyTarget}h</div>${progress(sumDates(weekDates()),state.settings.weeklyTarget)}`,'span-3')}
+${card('Monthly study time',`<div class="metric">${sumDates(monthDates()).toFixed(1)}h</div><div class="tiny muted">Target: ${state.settings.monthlyTarget}h</div>${progress(sumDates(monthDates()),state.settings.monthlyTarget)}`,'span-3')}
+${card('Subject progress',subjectRows,'span-7')}
+${card('Upcoming exams',upcoming,'span-5')}
+${card('Today’s priorities',`<div class="list">${tasks.slice(0,5).map(t=>`<label class="task ${t.done?'done':''}"><input type="checkbox" data-taskcheck="${t.id}" ${t.done?'checked':''}><span class="tasktext">${esc(t.title)}</span></label>`).join('')||'<div class="empty">No tasks for today. Add your first task.</div>'}</div><button class="btn" data-go="tasks" style="margin-top:12px">Manage tasks →</button>`,'span-6')}
+${card('Quick capture',`<form id="quickTaskForm" class="formgrid"><div class="field full"><label>What do you need to do?</label><input name="title" required placeholder="e.g. Solve 10 LA problems"></div><div class="field"><label>Due date</label><input name="date" type="date" value="${today()}"></div><div class="field"><label>Priority</label><select name="priority"><option>Medium</option><option>High</option><option>Low</option></select></div><div class="field full"><button class="btn primary">＋ Add task</button></div></form>`,'span-6')}
+</div>`);
+}
+function targets(){shell('Targets','Set the outcomes you want to hit. You control the numbers.',`<div class="grid">
+${card('Study-hour targets',`<form id="targetForm" class="formgrid">
+<div class="field"><label>Daily target (hours)</label><input name="daily" type="number" min="0" step=".25" value="${state.settings.dailyTarget}"></div>
+<div class="field"><label>Weekly target (hours)</label><input name="weekly" type="number" min="0" step=".5" value="${state.settings.weeklyTarget}"></div>
+<div class="field"><label>Monthly target (hours)</label><input name="monthly" type="number" min="0" step="1" value="${state.settings.monthlyTarget}"></div>
+<div class="field full"><button class="btn primary">Save study targets</button></div></form>`,'span-6')}
+${card('Create a goal',`<form id="goalForm" class="formgrid"><div class="field full"><label>Goal</label><input name="title" required placeholder="Finish multivariable calculus"></div><div class="field"><label>Deadline</label><input name="due" type="date"></div><div class="field"><label>Category</label><select name="category"><option>Study</option><option>Personal</option><option>Health</option><option>Other</option></select></div><div class="field full"><button class="btn primary">＋ Create goal</button></div></form>`,'span-6')}
+${card('Your goals',state.goals.map(g=>`<div class="item row"><label class="task ${g.done?'done':''}"><input type="checkbox" data-goal="${g.id}" ${g.done?'checked':''}><span class="tasktext"><b>${esc(g.title)}</b><div class="tiny muted">${esc(g.category)} · ${g.due?dateLabel(g.due):'No deadline'}</div></span></label><button class="btn ghost danger" data-delgoal="${g.id}">×</button></div>`).join('')||'<div class="empty">No goals yet. Create one above.</div>','span-12')}
+</div>`)}
+function tasks(){shell('Task manager','Capture everything, choose priorities and mark work complete.',`<div class="grid">
+${card('Add a task',`<form id="taskForm" class="formgrid"><div class="field full"><label>Task</label><input name="title" required placeholder="What needs to get done?"></div><div class="field"><label>Date</label><input name="date" type="date" value="${today()}"></div><div class="field"><label>Priority</label><select name="priority"><option>Medium</option><option>High</option><option>Low</option></select></div><div class="field"><label>Category</label><select name="category"><option>Study</option><option>Personal</option><option>Health</option><option>Admin</option></select></div><div class="field"><label>Estimated minutes</label><input name="estimate" type="number" min="0" placeholder="e.g. 45"></div><div class="field full"><button class="btn primary">＋ Add task</button></div></form>`,'span-5')}
+${card('Tasks',`<div class="tabs"><button class="active" data-filter="all">All</button><button data-filter="today">Today</button><button data-filter="open">Open</button><button data-filter="done">Completed</button></div><div id="taskList"></div>`,'span-7')}
+</div>`);renderTaskList('all')}
+function renderTaskList(filter){let arr=[...state.tasks].sort((a,b)=>({High:0,Medium:1,Low:2}[a.priority]-{High:0,Medium:1,Low:2}[b.priority]));if(filter==='today')arr=arr.filter(t=>t.date===today());if(filter==='open')arr=arr.filter(t=>!t.done);if(filter==='done')arr=arr.filter(t=>t.done);document.getElementById('taskList').innerHTML=arr.map(t=>`<div class="item row"><label class="task ${t.done?'done':''}"><input type="checkbox" data-taskcheck="${t.id}" ${t.done?'checked':''}><span class="tasktext"><b>${esc(t.title)}</b><div class="tiny muted">${esc(t.date||'No date')} · ${esc(t.category)} · ${esc(t.priority)} priority ${t.estimate?'· '+t.estimate+' min':''}</div></span></label><button class="btn ghost danger" data-deltask="${t.id}">×</button></div>`).join('')||'<div class="empty">Nothing here yet.</div>';document.querySelectorAll('[data-filter]').forEach(b=>{b.onclick=()=>{document.querySelectorAll('[data-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderTaskList(b.dataset.filter)}})}
+function subjects(){shell('Subjects & topics','Track study time and what you have covered for each subject.',`<div class="grid">${state.subjects.map(s=>{let l=logFor(today(),s.id);let days=s.exam?Math.ceil((new Date(s.exam+'T00:00:00')-new Date(today()+'T00:00:00'))/86400000):null;return `<div class="card span-6"><div class="sectionhead"><h2>${esc(s.name)}</h2><span class="pill">${s.exam?days<0?'Exam passed':days===0?'Exam today':days+' days left':'Date TBD'}</span></div><form class="subjectForm formgrid" data-id="${s.id}"><div class="field"><label>Exam date</label><input name="exam" type="date" value="${s.exam}"></div><div class="field"><label>Daily target (hours)</label><input name="target" type="number" min="0" step=".25" value="${s.target}"></div><div class="field full"><label>Syllabus / topics</label><textarea name="topics">${esc(s.topics)}</textarea></div><div class="field full"><label>Today's focused hours</label><input name="hours" type="number" min="0" step=".25" value="${l.hours||0}"></div><div class="field full"><label>Topics covered today</label><input name="covered" value="${esc(l.topic||'')}" placeholder="What did you study?"></div><div class="field full"><button class="btn">Save ${esc(s.name)}</button></div></form></div>`}).join('')}</div>`)}
+function schedule(){shell('Daily schedule','Edit your routine. Add study, personal, health and break blocks.',`<div class="grid">
+${card('Routine settings',`<form id="routineForm" class="formgrid"><div class="field"><label>Wake-up time</label><input type="time" name="wake" value="${state.settings.wake}"></div><div class="field"><label>Sleep time</label><input type="time" name="sleep" value="${state.settings.sleep}"></div><div class="field full"><button class="btn">Save routine settings</button></div></form>`,'span-4')}
+${card('Add schedule block',`<form id="blockForm" class="formgrid"><div class="field"><label>Time</label><input name="time" type="time" required></div><div class="field"><label>Type</label><select name="type"><option>Study</option><option>Personal</option><option>Health</option><option>Break</option></select></div><div class="field full"><label>Activity</label><input name="title" required placeholder="e.g. Gym / German grammar"></div><div class="field full"><button class="btn primary">＋ Add block</button></div></form>`,'span-8')}
+${card('Your timetable',state.schedule.slice().sort((a,b)=>a.time.localeCompare(b.time)).map((s,i)=>`<div class="scheduleline"><b>${esc(s.time)}</b><div><span class="dot"></span>${esc(s.title)}<div class="tiny muted">${esc(s.type)}</div></div><button class="btn ghost danger" data-delblock="${state.schedule.indexOf(s)}">×</button></div>`).join('')||'<div class="empty">No blocks yet.</div>','span-12')}
+</div>`)}
+function habits(){let done=state.habitLogs[today()]||[];shell('Habit tracker','Build consistency with small daily actions.',`<div class="grid">
+${card('Today’s habits',`<div class="list">${state.habits.map((h,i)=>`<label class="task"><input type="checkbox" data-habit="${i}" ${done.includes(i)?'checked':''}><span>${esc(h)}</span></label>`).join('')}</div><div class="metric">${done.length}/${state.habits.length}</div><div class="tiny muted">Habits completed today</div>${progress(done.length,state.habits.length||1)}`,'span-6')}
+${card('Add a habit',`<form id="habitForm" class="formgrid"><div class="field full"><label>Habit name</label><input name="habit" required placeholder="e.g. Read 10 pages"></div><div class="field full"><button class="btn primary">＋ Add habit</button></div></form><div class="tiny muted" style="margin-top:12px">Your habits stay in your personal tracker until you remove them in the data backup.</div>`,'span-6')}
+</div>`)}
+function analytics(){let ds=weekDates(),vals=ds.map(hoursFor),max=Math.max(1,...vals),wk=sumDates(ds),mo=sumDates(monthDates()),days=Object.keys(state.logs).sort().slice(-30),best=Math.max(0,...days.map(hoursFor));shell('Study analytics','Use your actual logs to understand consistency and progress.',`<div class="grid">
+${card('This week',`<div class="metric">${wk.toFixed(1)}h</div><div class="muted tiny">Target ${state.settings.weeklyTarget}h</div>${progress(wk,state.settings.weeklyTarget)}`,'span-3')}
+${card('This month',`<div class="metric">${mo.toFixed(1)}h</div><div class="muted tiny">Target ${state.settings.monthlyTarget}h</div>${progress(mo,state.settings.monthlyTarget)}`,'span-3')}
+${card('Best logged day',`<div class="metric">${best.toFixed(1)}h</div><div class="muted tiny">Among your last 30 logged days</div>`,'span-3')}
+${card('Logged days',`<div class="metric">${days.length}</div><div class="muted tiny">Days with study records</div>`,'span-3')}
+${card('Daily study hours · This week',`<div style="display:flex;align-items:end;gap:10px;height:160px;margin-top:20px">${ds.map((d,i)=>`<div style="flex:1;text-align:center"><div class="tiny">${vals[i].toFixed(1)}</div><div style="height:${Math.max(4,vals[i]/max*110)}px;background:linear-gradient(180deg,var(--accent),var(--mint));border-radius:7px 7px 2px 2px"></div><div class="tiny muted" style="margin-top:7px">${new Date(d+'T12:00:00').toLocaleDateString(undefined,{weekday:'short'})}</div></div>`).join('')}</div>`,'span-8')}
+${card('Subject totals · all logged days',state.subjects.map(s=>{let n=Object.values(state.logs).reduce((a,day)=>a+Number(day[s.id]?.hours||0),0);return `<div class="item"><div class="row"><b>${esc(s.name)}</b><span>${n.toFixed(1)}h</span></div></div>`}).join(''),'span-4')}
+</div>`)}
+function focus(){shell('Focus timer','A simple Pomodoro timer. Choose a focus interval and start.',`<div class="grid">
+${card('Pomodoro',`<div class="tabs" style="justify-content:center"><button data-min="25" class="active">25 min</button><button data-min="50">50 min</button><button data-min="15">15 min break</button></div><div class="timer" id="timerDisplay">${fmt(timerSeconds)}</div><div class="timercontrols"><button class="btn primary" id="timerStart">${timerRunning?'Pause':'Start focus'}</button><button class="btn" id="timerReset">Reset</button></div><div class="tiny muted" style="text-align:center;margin-top:14px">When you finish, record your session in Subjects.</div>`,'span-6')}
+${card('Focus tips',`<div class="list"><div class="item">① Pick one specific task before starting.</div><div class="item">② Put distractions out of reach.</div><div class="item">③ Take a short break between sessions.</div><div class="item">④ Log the time you actually focused.</div></div>`,'span-6')}
+</div>`);wireTimer()}
+function fmt(s){return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`}
+function wireTimer(){document.querySelectorAll('[data-min]').forEach(b=>b.onclick=()=>{timerRunning=false;clearInterval(timer);timerSeconds=Number(b.dataset.min)*60;document.getElementById('timerDisplay').textContent=fmt(timerSeconds);document.getElementById('timerStart').textContent='Start focus';document.querySelectorAll('[data-min]').forEach(x=>x.classList.remove('active'));b.classList.add('active')});document.getElementById('timerStart').onclick=()=>{if(timerRunning){timerRunning=false;clearInterval(timer);document.getElementById('timerStart').textContent='Resume'}else{timerRunning=true;document.getElementById('timerStart').textContent='Pause';timer=setInterval(()=>{timerSeconds--;let el=document.getElementById('timerDisplay');if(el)el.textContent=fmt(timerSeconds);if(timerSeconds<=0){clearInterval(timer);timerRunning=false;document.getElementById('timerStart').textContent='Start focus';alert('Focus session complete. Take a break!')}} ,1000)}};document.getElementById('timerReset').onclick=()=>{timerRunning=false;clearInterval(timer);timerSeconds=25*60;document.getElementById('timerDisplay').textContent=fmt(timerSeconds);document.getElementById('timerStart').textContent='Start focus'}}
+function settings(){shell('Settings & integrations','Manage your data, calendar export and app preferences.',`<div class="grid">
+${card('Your targets',`<div class="tiny muted">Daily ${state.settings.dailyTarget}h · Weekly ${state.settings.weeklyTarget}h · Monthly ${state.settings.monthlyTarget}h</div><button class="btn" data-go="targets" style="margin-top:12px">Edit targets</button>`,'span-6')}
+${card('Calendar integration',`<p class="muted tiny">Download your timetable as an .ics calendar file and import it into Google Calendar, Apple Calendar or Outlook.</p><button class="btn primary" id="icsBtn">Download calendar (.ics)</button>`,'span-6')}
+${card('Data & backups',`<p class="muted tiny">Your data is saved in this browser on this device. Export backups regularly if you want to move devices or keep a copy.</p><div class="actions"><button class="btn" id="exportBtn2">Export JSON backup</button><button class="btn" id="importBtn2">Import backup</button><button class="btn danger" id="resetBtn">Reset all data</button></div>`,'span-6')}
+${card('Cloud sync',`<div class="notice">Cloud sync is not connected in this standalone version. It needs a secure backend/account setup (for example Firebase or Supabase). Do not enter passwords or API secrets into this page.</div><p class="tiny muted">Local saving works now. Backup export/import lets you transfer your data manually.</p>`,'span-6')}
+</div>`)}
+function report(){let h=hoursFor(),tasks=state.tasks.filter(t=>t.date===today()),done=tasks.filter(t=>t.done),hab=(state.habitLogs[today()]||[]);let lines=[`DAILY REPORT — ${dateLabel()}`,`Focused study: ${h.toFixed(2)} / ${state.settings.dailyTarget} hours`,'','SUBJECTS',...state.subjects.map(s=>{let l=logFor(today(),s.id);return `${s.name}: ${l.hours||0}h — ${l.topic||'No topic logged'}`}),'','TASKS',...tasks.map(t=>`${t.done?'[x]':'[ ]'} ${t.title}`),'',`Habits completed: ${hab.length}/${state.habits.length}`,'','REFLECTION',state.reflections[today()]||'No reflection added'];return lines.join('\n')}
+function bind(){document.getElementById('quickAdd').onclick=()=>{page='tasks';render();document.querySelector('#taskForm input[name=title]')?.focus()};document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{page=b.dataset.go;render()});
+let q=document.getElementById('quickTaskForm');if(q)q.onsubmit=e=>{e.preventDefault();addTask(new FormData(q));render()};
+let tf=document.getElementById('taskForm');if(tf)tf.onsubmit=e=>{e.preventDefault();addTask(new FormData(tf));render()};
+document.querySelectorAll('[data-taskcheck]').forEach(c=>c.onchange=()=>{let t=state.tasks.find(x=>x.id===c.dataset.taskcheck);if(t){t.done=c.checked;save();render()}});
+document.querySelectorAll('[data-deltask]').forEach(b=>b.onclick=()=>{state.tasks=state.tasks.filter(t=>t.id!==b.dataset.deltask);save();render()});
+let tg=document.getElementById('targetForm');if(tg)tg.onsubmit=e=>{e.preventDefault();let f=new FormData(tg);state.settings.dailyTarget=Number(f.get('daily'));state.settings.weeklyTarget=Number(f.get('weekly'));state.settings.monthlyTarget=Number(f.get('monthly'));save();render()};
+let gf=document.getElementById('goalForm');if(gf)gf.onsubmit=e=>{e.preventDefault();let f=new FormData(gf);state.goals.push({id:crypto.randomUUID(),title:f.get('title'),due:f.get('due'),category:f.get('category'),done:false});save();render()};
+document.querySelectorAll('[data-goal]').forEach(c=>c.onchange=()=>{let g=state.goals.find(x=>x.id===c.dataset.goal);if(g)g.done=c.checked;save();render()});
+document.querySelectorAll('[data-delgoal]').forEach(b=>b.onclick=()=>{state.goals=state.goals.filter(g=>g.id!==b.dataset.delgoal);save();render()});
+document.querySelectorAll('.subjectForm').forEach(form=>form.onsubmit=e=>{e.preventDefault();let f=new FormData(form),s=state.subjects.find(x=>x.id===form.dataset.id);s.exam=f.get('exam');s.target=Number(f.get('target'));s.topics=f.get('topics');setLog(today(),s.id,'hours',Number(f.get('hours')));setLog(today(),s.id,'topic',f.get('covered'));save();render()});
+let rf=document.getElementById('routineForm');if(rf)rf.onsubmit=e=>{e.preventDefault();let f=new FormData(rf);state.settings.wake=f.get('wake');state.settings.sleep=f.get('sleep');save();render()};
+let bf=document.getElementById('blockForm');if(bf)bf.onsubmit=e=>{e.preventDefault();let f=new FormData(bf);state.schedule.push({time:f.get('time'),title:f.get('title'),type:f.get('type')});save();render()};
+document.querySelectorAll('[data-delblock]').forEach(b=>b.onclick=()=>{state.schedule.splice(Number(b.dataset.delblock),1);save();render()});
+document.querySelectorAll('[data-habit]').forEach(c=>c.onchange=()=>{let arr=state.habitLogs[today()]||[];let i=Number(c.dataset.habit);state.habitLogs[today()]=c.checked?[...new Set([...arr,i])]:arr.filter(x=>x!==i);save();render()});
+let hf=document.getElementById('habitForm');if(hf)hf.onsubmit=e=>{e.preventDefault();state.habits.push(new FormData(hf).get('habit'));save();render()};
+['exportBtn','exportBtn2'].forEach(id=>document.getElementById(id)?.addEventListener('click',exportData));
+['importBtn','importBtn2'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>document.getElementById('importFile').click()));
+document.getElementById('importFile').onchange=importData;
+document.getElementById('icsBtn')?.addEventListener('click',downloadICS);
+document.getElementById('resetBtn')?.addEventListener('click',()=>{if(confirm('Delete all app data from this browser? Export a backup first if needed.')){localStorage.removeItem(KEY);state=structuredClone(defaults);save();render()}});
+}
+function addTask(f){state.tasks.push({id:crypto.randomUUID(),title:f.get('title'),date:f.get('date')||today(),priority:f.get('priority')||'Medium',category:f.get('category')||'Study',estimate:f.get('estimate')||'',done:false});save()}
+function exportData(){let blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});downloadBlob(blob,`control-centre-backup-${today()}.json`)}
+function importData(e){let file=e.target.files[0];if(!file)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.subjects||!x.settings)throw Error();state={...structuredClone(defaults),...x};save();render();alert('Backup imported successfully.')}catch{alert('That file is not a valid Control Centre backup.')}};r.readAsText(file);e.target.value=''}
+function downloadBlob(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}
+function downloadICS(){let events=state.schedule.map(s=>{let [hh,mm]=s.time.split(':').map(Number),d=today().replaceAll('-','');let start=new Date();start.setHours(hh,mm,0,0);let end=new Date(start.getTime()+30*60000);let fmtD=x=>x.getFullYear()+String(x.getMonth()+1).padStart(2,'0')+String(x.getDate()).padStart(2,'0')+'T'+String(x.getHours()).padStart(2,'0')+String(x.getMinutes()).padStart(2,'0')+'00';return `BEGIN:VEVENT\nUID:${crypto.randomUUID()}@controlcentre\nDTSTAMP:${fmtD(new Date())}\nDTSTART:${fmtD(start)}\nDTEND:${fmtD(end)}\nSUMMARY:${s.title.replace(/[,;\\]/g,' ')}\nEND:VEVENT`}).join('\n');let ics=`BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Control Centre//EN\nCALSCALE:GREGORIAN\n${events}\nEND:VCALENDAR`;downloadBlob(new Blob([ics],{type:'text/calendar'}),`control-centre-${today()}.ics`)}
+function render(){nav();document.getElementById('todayLabel').textContent=dateLabel();({overview,targets,tasks,subjects,schedule,habits,analytics,focus,settings}[page]||overview)();bind();save()}
+render();
+</script>
+</body>
+</html>
